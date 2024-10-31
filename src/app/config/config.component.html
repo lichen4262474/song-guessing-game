@@ -1,0 +1,58 @@
+<section class="container-lg mt-5">
+  <h1 class="text-center mb-4">Song Guessing Challenge</h1>
+  <p class="text-center mb-4">
+    Rule: Choose an artist and select one album. Listen to the song and guess
+    its title. Achieve a score of 50% or higher to win!
+  </p>
+  <form
+    class="border p-4 rounded shadow text-center mx-auto"
+    style="max-width: 400px"
+    (ngSubmit)="OnSubmit()"
+  >
+    <div class="mb-3">
+      <label for="artist" class="form-label">Artist:</label>
+      <select
+        id="artist"
+        name="artist"
+        class="form-select"
+        required
+        [(ngModel)]="artistName"
+        (ngModelChange)="onArtistChange()"
+      >
+        <option value="" disabled selected>Select an Artist</option>
+        <option value="Michael Jackson">Michael Jackson</option>
+        <option value="The Eagles">The Eagles</option>
+        <option value="David Bowie">David Bowie</option>
+        <option value="Pink Floyd">Pink Floyd</option>
+        <option value="Led Zeppelin">Led Zeppelin</option>
+        <option value="Taylor Swift">Taylor Swift</option>
+<<<<<<< HEAD
+      </select>
+    </div>
+=======
+        <option value="other">Other: Specify Below</option>
+      </select>
+    </div>
+    <div class="form-group" *ngIf="artistName == 'other'">
+      <label for="artist">Enter Artist Name:</label>
+      <input type="text" class="form-control" id="artistInput" name="artistInput" (keydown.enter)="onArtistInput()" [(ngModel)] ="artistInput" required>
+    </div>
+>>>>>>> parent of 6e45be0 (fixed error 429)
+    <div class="mb-3">
+      <label for="album" class="form-label">Album:</label>
+      <select
+        id="album"
+        name="album"
+        class="form-select"
+        required
+        [(ngModel)]="albumId"
+      >
+        <option value="" disabled selected>Select an album</option>
+        <option *ngFor="let album of albums" [value]="album.id">
+          {{ album.name }}
+        </option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</section>

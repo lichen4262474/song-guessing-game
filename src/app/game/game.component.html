@@ -1,0 +1,63 @@
+<section class="container-lg mt-5">
+  <div class="row">
+    <div class="col-4 justify-content-center">
+      <h2>Question {{ trackIndex + 1 }}</h2>
+    </div>
+    <div class="col-8">
+      <audio controls #audioPlayer>
+        <source [attr.src]="trackPreview" type="audio/mpeg" />
+      </audio>
+    </div>
+  </div>
+  <div *ngIf="!trackPreview" class="row justify-content-center">
+    <div class="col-5 fs-5">
+      No preview available. Please choose a different album
+    </div>
+    <div class="col-1">
+      <button type="button" class="btn btn-danger" (click)="goBack()">
+        Go Back
+      </button>
+    </div>
+  </div>
+
+  <div class="options mt-5">
+    <div
+      class="row justify-content-center my-3"
+      *ngFor="let option of options | randomize"
+    >
+      <button
+        type="button"
+        class="btn btn-primary w-50"
+        (click)="checkAnswer(option)"
+        [disabled]="buttonDisabled"
+      >
+        {{ option }}
+      </button>
+    </div>
+  </div>
+
+  <div class="feedback">
+    <h6 class="text-center" *ngIf="correct">
+      Congratulations! Your answer is correct!
+    </h6>
+    <h6 class="text-center" *ngIf="wrong">Sorry! Your answer is wrong!</h6>
+  </div>
+
+  <div class="row my-3">
+    <div class="col text-center">
+      <button
+        class="btn btn-primary"
+        *ngIf="nextQuestion && trackIndex < tracks.length && trackPreview"
+        (click)="nextTrack(audioPlayer)"
+      >
+        Next Question
+      </button>
+    </div>
+  </div>
+
+  <div class="col text-center">
+    <button class="btn btn-primary" *ngIf="seeResult" (click)="showResult()">
+      See Result
+    </button>
+  </div>
+</section>
